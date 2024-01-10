@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forest_tagger/components/logIn.dart';
 
@@ -16,8 +15,8 @@ class SignUpAuth {
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: this._email, password: this._pwd)
         .then((signedUpUser) {
-      signedUpUser.user.sendEmailVerification();
-      FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser.uid).set({
+      signedUpUser.user!.sendEmailVerification();
+      FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).set({
         'email': this._email,
         'user': this._userName,
         'profileimg':'',

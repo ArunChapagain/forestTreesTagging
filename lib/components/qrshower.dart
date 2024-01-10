@@ -1,8 +1,5 @@
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:random_string/random_string.dart';
-import 'package:downloads_path_provider/downloads_path_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forest_tagger/components/backButton.dart';
 
@@ -22,24 +19,19 @@ class QRShower extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     return QRShowerState();
-
   }
 }
 
+class QRShowerState extends State<QRShower> {
+  // Future<Directory> _getDownloadsPath = DownloadsPathProvider.downloadsDirectory;
 
-class QRShowerState extends State<QRShower>{
-  Future<Directory> _getDownloadsPath =
-      DownloadsPathProvider.downloadsDirectory;
-
-  Uint8List _imageFile;
+  Uint8List? _imageFile;
 
   ScreenshotController screenshotController = ScreenshotController();
 
   @override
   Widget build(BuildContext context) {
-
     return Material(
-
       child: Stack(
         children: [
           Center(
@@ -51,7 +43,7 @@ class QRShowerState extends State<QRShower>{
                   controller: screenshotController,
                   child: PrettyQr(
                       image:
-                      NetworkImage("https://i.ibb.co/TqSqLS9/forest-1.png"),
+                          NetworkImage("https://i.ibb.co/TqSqLS9/forest-1.png"),
                       typeNumber: 15,
                       size: 350,
                       data: qrData.trim(),
@@ -60,7 +52,11 @@ class QRShowerState extends State<QRShower>{
                 SizedBox(
                   height: 30,
                 ),
-                FlatButton(
+                TextButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green),
+                  ),
                   child: Text(
                     'Save QR code',
                     style: TextStyle(
@@ -68,11 +64,10 @@ class QRShowerState extends State<QRShower>{
                       fontSize: 18,
                     ),
                   ),
-                  color: Colors.lightGreen,
                   onPressed: () async {
                     screenshotController
                         .capture(delay: Duration(milliseconds: 10))
-                        .then((Uint8List image) async {
+                        .then((Uint8List? image) async {
                       _imageFile = image;
                     }).catchError((onError) {
                       print(onError);
@@ -88,9 +83,10 @@ class QRShowerState extends State<QRShower>{
       ),
     );
   }
-  void createSave() async{
+
+  void createSave() async {
     final image = pw.MemoryImage(
-      _imageFile,
+      _imageFile!,
     );
     final pdf = pw.Document();
     pdf.addPage(
@@ -100,46 +96,45 @@ class QRShowerState extends State<QRShower>{
         ),
       ),
     );
-    final file = await _localFile;
-    await file.writeAsBytes(await pdf.save(),flush: true);
-
+    // final file = await _localFile;
+    // await file.writeAsBytes(await pdf.save(), flush: true);
   }
 
   void onCheckPermission() async {
     var status = await Permission.storage.status;
-    if (status.isDenied || status.isUndetermined) {
-      if (await Permission.storage.isPermanentlyDenied) {
-        openAppSettings();
 
-      } else {
-        var status1 = await Permission.storage.request();
-        if (status1.isGranted) {}
-      }
+    if (status.isDenied) {
+      // Your code here
+    }
+    if (await Permission.storage.isPermanentlyDenied) {
+      openAppSettings();
     } else {
-      final pdf = pw.Document();
-      pdf.addPage(
-        pw.Page(
-          build: (pw.Context context) => pw.Center(
-            child: pw.Text('Hello World!'),
+      var status1 = await Permission.storage.request();
+      if (status1.isGranted) {
+      } else {
+        final pdf = pw.Document();
+        pdf.addPage(
+          pw.Page(
+            build: (pw.Context context) => pw.Center(
+              child: pw.Text('Hello World!'),
+            ),
           ),
-        ),
-      );
+        );
 
-      createSave();
+        createSave();
+      }
     }
   }
 
-  Future<File> get _localFile async {
+  // Future<File> get _localFile async {
+  //   final path = await _localPath;
 
-    final path=await _localPath;
+  //   return File('$path/${(10)}.pdf');
+  // }
 
-    return File('$path/${randomString(10)}.pdf');
-  }
+  // Future<String> get _localPath async {
+  //   final downloadsDir = await _getDownloadsPath;
 
-  Future<String> get _localPath async {
-
-    final downloadsDir = await _getDownloadsPath;
-
-    return downloadsDir.path;
-  }
+  //   return downloadsDir.path;
+  // }
 }

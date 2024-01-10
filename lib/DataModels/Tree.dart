@@ -4,9 +4,9 @@ import 'package:sqflite/sqflite.dart';
 
 class Tree{
 
-  String treeId;
-  String latitude;
-  String longitude;
+  String? treeId;
+  String? latitude;
+  String? longitude;
 
   Tree(this.treeId, this.latitude, this.longitude);
 
@@ -29,7 +29,7 @@ class Tree{
 
 class TreeProvider{
 
-  Database db;
+  Database? db;
 
   Future open(String path) async {
     db = await openDatabase(path, version: 1,
@@ -45,12 +45,12 @@ class TreeProvider{
 
   void insert(Tree tree) async {
     await open("treeDatabase.db");
-    await db.insert("Trees", tree.toMap(),nullColumnHack: 'id');
+    await db!.insert("Trees", tree.toMap(),nullColumnHack: 'id');
   }
 
   Future<List<Map>> getTrees() async{
     await open("treeDatabase.db");
-    return db.query("Trees", columns: ["treeId", "latitude", "longitude"]);
+    return db!.query("Trees", columns: ["treeId", "latitude", "longitude"]);
   }
 
 }

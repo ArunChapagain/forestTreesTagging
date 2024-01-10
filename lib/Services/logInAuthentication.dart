@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 import '../components/homeScreen.dart';
 
@@ -16,7 +15,7 @@ class LogInAuth {
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: this._email, password: this._pwd)
         .then((signedInUser) {
-      if (!signedInUser.user.emailVerified) {
+      if (!signedInUser.user!.emailVerified) {
         messageShow(this._context, "Log-In Error",
             "Email Not Verified\nA Link send to your registered mail\nPlease verify email at first");
         FirebaseAuth.instance.signOut();

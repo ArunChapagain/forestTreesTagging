@@ -165,10 +165,9 @@ class GeneratorPageState extends State<GeneratorPage> {
                     } else {
                       Toast.show(
                         "Please enter the data",
-                        context,
-                        duration: Toast.LENGTH_LONG,
-                        gravity: Toast.BOTTOM,
-                        textColor: Colors.white,
+                        duration: Toast.lengthLong,
+                        gravity: Toast.bottom,
+                        textStyle: Colors.white,
                       );
                     }
                   },

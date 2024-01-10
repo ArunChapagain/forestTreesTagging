@@ -1,8 +1,6 @@
-import 'package:clip_shadow/clip_shadow.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:forest_tagger/Services/signUpAuthentication.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:shadow_clip/shadow_clip.dart';
 
 import 'logIn.dart';
 
@@ -40,15 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    return ModalProgressHUD(
-        inAsyncCall: isLoading,
-        color: Colors.black54,
-        opacity: 0.7,
-        progressIndicator: CircularProgressIndicator(
-          backgroundColor: Colors.black38,
-          strokeWidth: 5.0,
-        ),
-        child: Scaffold(
+    return  Scaffold(
           resizeToAvoidBottomInset: true,
           body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
@@ -121,7 +111,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: _userName,
                         maxLines: 1,
                         validator: (userName) {
-                          if (userName.length < 4)
+                          if (userName!.length < 4)
                             return "User Name At Least 4 characters";
                           return null;
                         },
@@ -144,7 +134,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         validator: (userEmail) {
                           RegExp _emailRegex = RegExp(
                               r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-                          if (_emailRegex.hasMatch(userEmail)) {
+                          if (_emailRegex.hasMatch(userEmail!)) {
                             return null;
                           }
                           return "Enter Valid Email";
@@ -166,7 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       child: TextFormField(
                         controller: _userPwd,
                         validator: (userPwd) {
-                          if (userPwd.length < 6)
+                          if (userPwd!.length < 6)
                             return "Password At Least 6 characters";
                           return null;
                         },
@@ -189,7 +179,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: _userConfirmPwd,
                         obscureText: true,
                         validator: (userConPwd) {
-                          if (userConPwd.length < 6)
+                          if (userConPwd!.length < 6)
                             return "Password at least 6 characters";
                           else if (userConPwd != _userPwd.text)
                             return "Password and Confirm Password are not same";
@@ -260,7 +250,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ),
                         onPressed: () async {
-                          if (_signUpKey.currentState.validate()) {
+                          if (_signUpKey.currentState!.validate()) {
                             setState(() {
                               print("True");
                               isLoading = true;
@@ -291,6 +281,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
           ),
-        ));
+        );
   }
 }

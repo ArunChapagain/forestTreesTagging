@@ -28,7 +28,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen> {
   String name = "User";
-  File _image;
+  File ?_image;
   var _uploadImg;
   final _auth = AuthService.instance;
   final firebasestorage = FirebaseStorageServices.instance;
@@ -44,10 +44,11 @@ class _HomeScreen extends State<HomeScreen> {
   
   //used for picking image from gallery
   Future getImageFromStorage(BuildContext context) async {
-    var image = await ImagePicker().getImage(source: ImageSource.gallery);
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
     setState(() {
       try {
-        _image = File(image.path);
+        _image = File(image!.path);
         _uploadImg = setProfilePic(context);
       } catch (e) {
         _uploadImg = null;
@@ -62,7 +63,7 @@ class _HomeScreen extends State<HomeScreen> {
       _uploadImg = null;
     });
 
-    await firebasestorage.uploadProfilePic(_image);
+    await firebasestorage.uploadProfilePic(_image!);
   }
   
   //used for opening file manager to search for images to set as profile pic
@@ -70,7 +71,7 @@ class _HomeScreen extends State<HomeScreen> {
     try {
       return _image != null
           ? Image.file(
-              _image,
+              _image!,
               fit: BoxFit.fill,
             )
           : _profileImage;
@@ -112,11 +113,11 @@ class _HomeScreen extends State<HomeScreen> {
       //As soon as the homescreen loads firstly all the user info is fetched from firbase
       userdata.fetchData().then((value) {
         setState(() {
-          this.name = userdata.name;
+          this.name = userdata.name!;
           print(this.name);
           //profile image is set from the fetched data
           _profileImage = Image.network(
-            userdata.profileimg,
+            userdata.profileimg!,
             fit: BoxFit.fill,
           );
         });

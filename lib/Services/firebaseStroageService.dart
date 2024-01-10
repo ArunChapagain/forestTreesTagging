@@ -10,13 +10,13 @@ class FirebaseStorageServices {
   FirebaseStorageServices._internal();
   static FirebaseStorageServices get instance => _singleton;
 
-  String path;
+  String? path;
   
   //used to upload profileimage on firebase storage bucket and then generate the imageurl,
   //which is further used to load image
   Future uploadProfilePic(File _image) async {
     // Profile Image name Same as user id
-    String fileName = FirebaseAuth.instance.currentUser.uid;
+    String fileName = FirebaseAuth.instance.currentUser!.uid;
     Reference firebaseStorageRef =
         FirebaseStorage.instance.ref().child(fileName);
     UploadTask uploadTask = firebaseStorageRef.putFile(_image);
@@ -28,7 +28,7 @@ class FirebaseStorageServices {
         print(path);
         await FirebaseFirestore.instance
             .collection('users')
-            .doc(FirebaseAuth.instance.currentUser.uid)
+            .doc(FirebaseAuth.instance.currentUser!.uid)
             .update({
           'profileimg': path,
         });

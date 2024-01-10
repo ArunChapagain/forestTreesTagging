@@ -10,13 +10,13 @@ class AuthService {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final FirebaseAuth _auth = FirebaseAuth.instance;
   
-  String imageUrl;
-  String userName;
+  String?imageUrl;
+  String?userName;
 
   Future<String> signInWithGoogle() async {
-    final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication =
-        await googleSignInAccount.authentication;
+        await googleSignInAccount!.authentication;
 
     final AuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleSignInAuthentication.accessToken,
@@ -25,7 +25,7 @@ class AuthService {
 
     final UserCredential authResult =
         await _auth.signInWithCredential(credential);
-    final User user = authResult.user;
+    final User user = authResult.user!;
 
     if (user != null) {
       // Checking if email and name is null
@@ -33,13 +33,13 @@ class AuthService {
       assert(user.displayName != null);
       assert(user.photoURL != null);
 
-      imageUrl = user.photoURL;
-      userName = user.displayName;
+      imageUrl = user.photoURL!;
+      userName = user.displayName!;
 
       assert(!user.isAnonymous);
       assert(await user.getIdToken() != null);
 
-      final User currentUser = _auth.currentUser;
+      final User currentUser = _auth.currentUser!;
       assert(user.uid == currentUser.uid);
       //signin through google and set name,email and profile image on firebase
       await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
@@ -52,7 +52,7 @@ class AuthService {
 
       return '${user.uid}';
     }
-    return null;
+    return Exception().toString();
   }
 
   Future<void> signOutGoogle() async {

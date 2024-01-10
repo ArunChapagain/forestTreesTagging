@@ -1,10 +1,10 @@
-import 'package:barcode_scan/barcode_scan.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:forest_tagger/DataModels/Tree.dart';
 import 'package:forest_tagger/components/treeListItem.dart';
 import 'package:forest_tagger/main.dart';
+import 'package:barcode_scan2/barcode_scan2.dart';
+// import 'package:pdf/widgets.dart';
 
 class ScannerPage extends StatefulWidget {
   @override
@@ -27,12 +27,11 @@ class ScannerPageState extends State<ScannerPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: FlatButton(
-                  padding: EdgeInsets.all(15.0),
+                child: TextButton(
                   onPressed: () async {
                     try {
-                      String res = await BarcodeScanner.scan();
-                      var arr = res.split(", ");
+                      // final res = await BarcodeScanner.scan();
+                      var arr = ['1', '2', '3'];
                       Tree t = Tree(arr[0], (arr[1]), (arr[2]));
                       TreeProvider().insert(t);
                       List<Tree> newList = [];
@@ -44,7 +43,7 @@ class ScannerPageState extends State<ScannerPage> {
                         listOfScanneedTrees = newList;
                       });
                     } on PlatformException catch (e) {
-                      if (e.code == BarcodeScanner.CameraAccessDenied) {
+                      if (e.code == BarcodeScanner.cameraAccessDenied) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             duration: Duration(seconds: 5),
                             content: Text('Camera Access Denied.')));
@@ -69,9 +68,11 @@ class ScannerPageState extends State<ScannerPage> {
                     style: TextStyle(
                         color: Colors.lightGreen, fontWeight: FontWeight.bold),
                   ),
-                  shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.green, width: 3.0),
-                      borderRadius: BorderRadius.circular(20.0)),
+                  style: TextButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(color: Colors.green, width: 3.0),
+                        borderRadius: BorderRadius.circular(10.0)),
+                  ),
                 ),
               ),
               Padding(

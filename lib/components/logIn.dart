@@ -1,8 +1,6 @@
 import 'dart:io';
 
-import 'package:auth_buttons/res/buttons/google_auth_button.dart';
-import 'package:auth_buttons/res/shared/auth_style.dart';
-import 'package:clip_shadow/clip_shadow.dart';
+import 'package:auth_buttons/auth_buttons.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,7 +9,7 @@ import 'package:forest_tagger/Services/googleAuthentication.dart';
 import 'package:forest_tagger/Services/logInAuthentication.dart';
 import 'package:forest_tagger/components/homeScreen.dart';
 import 'package:forest_tagger/components/signUp.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:shadow_clip/shadow_clip.dart';
 
 class LogInScreen extends StatefulWidget {
   @override
@@ -26,7 +24,7 @@ class _LogInScreenState extends State<LogInScreen> {
 
   TextEditingController _userEmail = TextEditingController();
   TextEditingController _userPwd = TextEditingController();
-  File _image;
+  File? _image;
 
   final RegExp _emailRegex = RegExp(
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
@@ -49,15 +47,7 @@ class _LogInScreenState extends State<LogInScreen> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    return ModalProgressHUD(
-        inAsyncCall: isLoading,
-        color: Colors.black54,
-        opacity: 0.7,
-        progressIndicator: CircularProgressIndicator(
-          backgroundColor: Colors.black38,
-          strokeWidth: 5.0,
-        ),
-        child: Scaffold(
+    return  Scaffold(
           body: SingleChildScrollView(
             physics: AlwaysScrollableScrollPhysics(),
             child: Container(
@@ -130,7 +120,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       child: TextFormField(
                         controller: _userEmail,
                         validator: (userEmail) {
-                          if (_emailRegex.hasMatch(userEmail)) {
+                          if (_emailRegex.hasMatch(userEmail!)) {
                             return null;
                           }
                           return "Enter Valid Email";
@@ -150,7 +140,7 @@ class _LogInScreenState extends State<LogInScreen> {
                       child: TextFormField(
                         controller: _userPwd,
                         validator: (userPwd) {
-                          if (userPwd.length < 6)
+                          if (userPwd!.length < 6)
                             return "Password At Least 6 characters";
                           return null;
                         },
@@ -244,7 +234,7 @@ class _LogInScreenState extends State<LogInScreen> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  if (_logInKey.currentState.validate()) {
+                                  if (_logInKey.currentState!.validate()) {
                                     setState(() {
                                       print("True");
                                       isLoading = true;
@@ -333,16 +323,17 @@ class _LogInScreenState extends State<LogInScreen> {
                     Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: GoogleAuthButton(
-                          borderRadius: 29,
-                          iconSize: 30,
-                          style: AuthButtonStyle.icon,
+                          style: AuthButtonStyle(
+                            buttonType: AuthButtonType.icon,
+                            iconType: AuthIconType.outlined,
+                          ),
                           onPressed: () async {
                             final result = await _auth.signInWithGoogle();
                             if (result != null) {
                               Navigator.pushAndRemoveUntil(context,
                                   MaterialPageRoute(
                                 builder: (context) {
-                                  return HomeScreen(_auth.userName);
+                                  return HomeScreen(_auth.userName!);
                                 },
                               ), (route) => false);
                             }
@@ -353,7 +344,7 @@ class _LogInScreenState extends State<LogInScreen> {
               ),
             ),
           ),
-        ));
+        );
   }
 
   // Alert To Show

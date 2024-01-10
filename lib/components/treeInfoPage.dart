@@ -16,7 +16,7 @@ class TreeInfoPage extends StatefulWidget {
 }
 
 class _TreeInfoPageState extends State<TreeInfoPage> {
-  List<String> parts;
+  List<String>? parts;
   final String token =
       'pk.eyJ1IjoibW9oaXQxODA0IiwiYSI6ImNrbjhjcWR1MzAyb2IydW55NXNpMG8ybmoifQ.RhiXGu0GGdr0q4mhqVIf5A';
   final String style = 'mapbox://styles/mapbox/streets-v11';
@@ -58,7 +58,7 @@ class _TreeInfoPageState extends State<TreeInfoPage> {
                             ),
                             SizedBox(height: 5),
                             Text(
-                              widget.t.treeId,
+                              widget.t.treeId!,
                               style:
                                   TextStyle(fontSize: 20, color: Colors.black),
                             ),
@@ -112,7 +112,7 @@ class _TreeInfoPageState extends State<TreeInfoPage> {
                                       Row(
                                         children: [
                                           Text(
-                                            parts[0].trim(),
+                                            parts![0].trim(),
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 25,
@@ -179,8 +179,8 @@ class _TreeInfoPageState extends State<TreeInfoPage> {
                       styleString: style,
                       initialCameraPosition: CameraPosition(
                         zoom: 11.0,
-                        target: LatLng(double.parse(widget.t.latitude),
-                            double.parse(widget.t.longitude)),
+                        target: LatLng(double.parse(widget.t.latitude!),
+                            double.parse(widget.t.longitude!)),
                       ),
                     ),
                   ),

@@ -8,7 +8,7 @@ class TreeListItem extends StatelessWidget {
   int pos;
   Tree t;
   TreeListItem(this.pos, this.t);
-  String name, year, length;
+  String ? name, year, length;
 
   Future<void> fetchData(String docid) async {
     try {
@@ -28,11 +28,11 @@ class TreeListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        await fetchData(t.treeId);
+        await fetchData(t.treeId!);
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => TreeInfoPage(t, name, year, length)));
+                builder: (context) => TreeInfoPage(t, name!, year!, length!)));
       },
       child: Container(
         margin: EdgeInsets.only(left: 16, right: 16, top: 16),
@@ -74,17 +74,14 @@ class TreeListItem extends StatelessWidget {
                 }
 
                 if (snapshot.connectionState == ConnectionState.done) {
-                  Map<String, dynamic> data = snapshot.data.data();
-                  if (data != null)
-                    return Text(
-                      (DateTime.now().year-int.parse(data['treeYear'])).toString()+" years",
-                      style: TextStyle(
-                          color: Colors.black38,
-                          fontSize: 20.0),
-                      maxLines: 1,
-                    );
-                  else
-                    return Text('Data not found');
+                  Map<String, dynamic> data = snapshot.data!.data() as Map<String, dynamic>;
+                  return Text(
+                    (DateTime.now().year-int.parse(data['treeYear'])).toString()+" years",
+                    style: TextStyle(
+                        color: Colors.black38,
+                        fontSize: 20.0),
+                    maxLines: 1,
+                  );
                 }
 
                 return CircularProgressIndicator();

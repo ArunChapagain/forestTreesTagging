@@ -9,7 +9,7 @@ class Welcome extends StatefulWidget {
 }
 
 class _WelcomeState extends State<Welcome> {
-  bool isLoading;
+  bool? isLoading;
 
   @override
   void initState() {

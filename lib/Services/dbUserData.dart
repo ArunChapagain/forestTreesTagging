@@ -6,20 +6,20 @@ class DbUserData {
   DbUserData._internal();
   static DbUserData get instance => _singleton;
 
-  String name, email, profileimg;
+  String ?name, email, profileimg;
   
   //used to fetch user information from firebase
   Future<void> fetchData() async {
     try {
       await FirebaseFirestore.instance
           .collection('users')
-          .doc(FirebaseAuth.instance.currentUser.uid)
+          .doc(FirebaseAuth.instance.currentUser!.uid)
           .get()
           .then((value) {
         name = value.get('user');
         email = value.get('email');
         profileimg = value.get('profileimg');
-        if(profileimg==null || profileimg==""){
+        if(profileimg==""){
           //if profileimage is not set then load default image
           profileimg = 'https://www.shout-fm.de/media/images/unbekannt.jpg';
         }
