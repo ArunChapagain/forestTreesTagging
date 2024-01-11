@@ -1,42 +1,122 @@
 {
   "project_info": {
-    "project_number": "453375936121",
-    "project_id": "foresttagger",
-    "storage_bucket": "foresttagger.appspot.com"
+    "project_number": "281883850209",
+    "firebase_url": "https://geo-quiz-70986-default-rtdb.firebaseio.com",
+    "project_id": "geo-quiz-70986",
+    "storage_bucket": "geo-quiz-70986.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:453375936121:android:819e51643e4a8f0e0236a8",
+        "mobilesdk_app_id": "1:281883850209:android:f6ba3c43d7f988b7fccea0",
         "android_client_info": {
           "package_name": "com.company.codeflow"
         }
       },
       "oauth_client": [
         {
-          "client_id": "453375936121-vn6cqi8m5h0vr7lppl4pvgi3si6r1t4r.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.company.codeflow",
-            "certificate_hash": "1cc63aed40b207db68825c78bd3c392da4994fef"
-          }
-        },
-        {
-          "client_id": "453375936121-hv4alvekgjcs3br53jrgg0p01noglqvd.apps.googleusercontent.com",
+          "client_id": "281883850209-ines023i73o95oo610ov1r3kucjpkde2.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBAeIM6jj5FEKqIduWp1XXl4ZCCXGlXcOo"
+          "current_key": "AIzaSyBOsgQ-m9R9NkxFbxTBzZFuQ9FBNRc827w"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "453375936121-hv4alvekgjcs3br53jrgg0p01noglqvd.apps.googleusercontent.com",
+              "client_id": "281883850209-7v911ab5nb80vrugn35al7qqpi65gcv8.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "281883850209-986t2641sqh6ahh8k113nj5rt1ltssvu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gameTemplate"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281883850209:android:6c77af663a5bc3d9fccea0",
+        "android_client_info": {
+          "package_name": "com.example.auth_ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281883850209-aljo7p8djqbhvd6pjij5ns2c79fndd47.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.auth_ui",
+            "certificate_hash": "92c6072a7358830ccda2a677b831c0b369600ca8"
+          }
+        },
+        {
+          "client_id": "281883850209-ines023i73o95oo610ov1r3kucjpkde2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOsgQ-m9R9NkxFbxTBzZFuQ9FBNRc827w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "281883850209-7v911ab5nb80vrugn35al7qqpi65gcv8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "281883850209-986t2641sqh6ahh8k113nj5rt1ltssvu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gameTemplate"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:281883850209:android:bb59ac57e365cfcffccea0",
+        "android_client_info": {
+          "package_name": "com.example.game_template"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "281883850209-ines023i73o95oo610ov1r3kucjpkde2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOsgQ-m9R9NkxFbxTBzZFuQ9FBNRc827w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "281883850209-7v911ab5nb80vrugn35al7qqpi65gcv8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "281883850209-986t2641sqh6ahh8k113nj5rt1ltssvu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gameTemplate"
+              }
             }
           ]
         }

@@ -6,11 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'homeScreen.dart';
 
 Widget loggedInChecking(){
-  if(FirebaseAuth.instance.currentUser == null)
-    return Welcome();
-  else {
+  // if(FirebaseAuth.instance.currentUser == null)
+  //   return Welcome();
+  // else {
     return HomeScreen("User");
 
   }
-}
+// }
 

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:forest_tagger/DataModels/Tree.dart';
 import 'package:forest_tagger/components/backButton.dart';
-import 'package:mapbox_gl/mapbox_gl.dart';
+// import 'package:mapbox_gl/mapbox_gl.dart';
 
 class TreeInfoPage extends StatefulWidget {
   Tree t;
@@ -174,15 +174,15 @@ class _TreeInfoPageState extends State<TreeInfoPage> {
                 SizedBox(height: 10),
                 Expanded(
                   child: Container(
-                    child: MapboxMap(
-                      accessToken: token,
-                      styleString: style,
-                      initialCameraPosition: CameraPosition(
-                        zoom: 11.0,
-                        target: LatLng(double.parse(widget.t.latitude!),
-                            double.parse(widget.t.longitude!)),
-                      ),
-                    ),
+                    // child: MapboxMap(
+                    //   accessToken: token,
+                    //   styleString: style,
+                    //   initialCameraPosition: CameraPosition(
+                    //     zoom: 11.0,
+                    //     target: LatLng(double.parse(widget.t.latitude!),
+                    //         double.parse(widget.t.longitude!)),
+                    //   ),
+                    // ),
                   ),
                 )
               ],
